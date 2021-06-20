@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("AutoHotkey.Interop")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("This project is a basic wrapper around HotKeyIt's AHKDLL (aka AutoHotkey_H) for .Net Projects.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Chris Kaiser")]
 [assembly: AssemblyProduct("AutoHotkey.Interop")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
