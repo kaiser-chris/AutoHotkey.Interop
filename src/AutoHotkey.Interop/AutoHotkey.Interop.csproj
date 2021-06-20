@@ -65,6 +65,7 @@
     <Compile Include="AhkEscape.cs" />
     <Compile Include="AutoHotkeyDll.cs" />
     <Compile Include="AutoHotkeyEngine.cs" />
+    <Compile Include="AutoHotKeyVersion.cs" />
     <Compile Include="Pipes\MessageHandlerPipeServer.cs" />
     <Compile Include="Pipes\NamedPipeServer.cs" />
     <Compile Include="Pipes\PipesModuleLoader.cs" />
