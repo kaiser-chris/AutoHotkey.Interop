@@ -18,8 +18,11 @@ namespace AutoHotkey.Interop
         private static Lazy<AutoHotkeyEngine> lazyInstance =
             new Lazy<AutoHotkeyEngine>(() => new AutoHotkeyEngine());
 
-        private AutoHotkeyEngine() {
-            Util.AutoHotkeyDllLoader.EnsureDllIsLoaded();
+        private AutoHotkeyEngine() : this(AutoHotKeyVersion.v1) {
+        }
+
+        private AutoHotkeyEngine(AutoHotKeyVersion version) {
+            Util.AutoHotkeyDllLoader.EnsureDllIsLoaded(version);
             AutoHotkeyDll.ahktextdll("", "", "");
         }
 

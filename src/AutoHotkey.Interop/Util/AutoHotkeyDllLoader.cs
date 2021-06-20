@@ -9,25 +9,51 @@ namespace AutoHotkey.Interop.Util
 {
     internal static class AutoHotkeyDllLoader
     {
-        private static readonly Lazy<SafeLibraryHandle> dllHandle
-            = new Lazy<SafeLibraryHandle>(LoadDll);
-        
+        private static readonly Lazy<SafeLibraryHandle> dllHandlev1
+            = new Lazy<SafeLibraryHandle>(() => LoadDll(AutoHotKeyVersion.v1));
 
-        internal static void EnsureDllIsLoaded() {
+        private static readonly Lazy<SafeLibraryHandle> dllHandlev2
+            = new Lazy<SafeLibraryHandle>(() => LoadDll(AutoHotKeyVersion.v2));
+
+
+        internal static void EnsureDllIsLoaded(AutoHotKeyVersion version) {
+            Lazy<SafeLibraryHandle> dllHandle;
+            switch (version) {
+                case AutoHotKeyVersion.v1:
+                    dllHandle = dllHandlev1;
+                    break;
+                case AutoHotKeyVersion.v2:
+                    dllHandle = dllHandlev2;
+                    break;
+                default:
+                    throw new Exception("Unsupported Version");
+            }
+
             if (dllHandle.IsValueCreated)
                 return;
 
             var handle = dllHandle.Value;
         }
 
-        private static SafeLibraryHandle LoadDll() {
+        private static SafeLibraryHandle LoadDll(AutoHotKeyVersion version) {
             //determine if we should use x86/AutoHotkey.dll or x64/AutoHotkey.dll
             //then try to load it by the file directory or 
             //extract the embeded ones into a temp directory 
             //and load them
 
             string processor_type = ProcessorType.Is32Bit() ? "x86" : "x64";
-            string relativePath = processor_type + "/AutoHotkey.dll";
+            string relativePath;
+            switch (version)
+            {
+                case AutoHotKeyVersion.v1:
+                    relativePath = processor_type + "/AutoHotkey.dll";
+                    break;
+                case AutoHotKeyVersion.v2:
+                    relativePath = processor_type + "/v2_AutoHotkey.dll";
+                    break;
+                default:
+                    throw new Exception("Unsupported Version");
+            }
 
             if (File.Exists(relativePath)) { 
                 return SafeLibraryHandle.LoadLibrary(relativePath);
