@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>$id$</id>
-    <version>1.0.0.1</version>
+    <version>1.0.1</version>
     <title>AutoHotkey.Interop</title>
     <authors>Andrew Smith, Chris Kaiser</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
